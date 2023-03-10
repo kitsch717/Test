@@ -1,0 +1,76 @@
+一、neo4j启动步骤 （版本以4.4.10为例）
+1.将“neo4j-community-4.4.10-windows”文件夹放入D盘
+2.启动cmd命令提示符
+3.输入d:  点击回车进入D盘
+4.输入“cd D:\neo4j-community-4.4.10-windows\bin”,点击回车进入数据库
+5.输入“neo4j console”，点击回车，启动数据库
+6.打开浏览器访问“http://localhost:7474”
+  数据库初始用户名和密码都为：neo4j，修改自己的密码：123 
+7.输入“ctrl + c”，点击回车，关闭数据库
+
+【注意】JDK11
+
+=================================================
+
+一、知识图谱说明：
+
+1、将提供"data" 直接替换到 D:\neo4j-community-4.4.10-windows 中；
+
+2、图数据库服务启动
+		D:\neo4j-community-4.4.10-windows\bin	
+		启动：neo4j console
+		关闭：ctrl + c
+		访问：http://localhost:7474
+
+
+二、neo4j常用命令：
+
+ 1、【图数据库——初始化导入数据】： 
+		注意：数据库必须为空，同时 neo4j需要关闭；即：neo4j-community-4.4.10-windows\data中必须清空，否则初始导入失败。
+		
+		【待导入数据存放目录】：***    将导入文件存放到该目录下
+		   D:\neo4j-community-4.4.10-windows\import
+		【生成data保存目录】：
+		    D:\neo4j-community-4.4.10-windows\data
+		    
+		
+		导入数据命令：  
+		1、cmd 进入 D:\neo4j-community-4.4.10-windows\bin	 
+		2、批量导入命令：
+		   neo4j-admin import --nodes "import/entity_node.Header.csv,import/entity_node.csv"  --relationships "import/rela_node.Header.csv,import/rela_node.csv"  --skip-bad-relationships --skip-duplicate-nodes
+    
+    【参数说明】：
+    --nodes：插入节点，
+    --relationships：插入关系，
+    --skip-bad-relationships：忽略错误的节点，    
+    --skip-duplicate-nodes：忽略重复的节点，
+     		
+ 2、【图数据库——服务启动】
+		D:\neo4j-community-4.4.10-windows\bin	
+		启动：neo4j console
+		关闭：ctrl + c
+		访问：http://localhost:7474
+		 
+	 
+四、图数据库检索常用语句：
+
+1、检索实体数据：
+	# 查询'69-4 型潜水装具'的相关部件；
+	MATCH p=(n:Nodes{name:'69-4 型潜水装具'})-[r:predicate]-(m:Nodes) 
+	where r.name = '部件'
+	RETURN p	
+	
+	# 查询'69-4 型潜水装具'的所有的关联关系
+	MATCH p=(n:Nodes{name:'69-4 型潜水装具'})-[r:predicate]-(m:Nodes) 
+	RETURN p
+	
+
+
+2、创建索引
+	创建索引：CREATE INDEX ON :Nodes(name)
+	查询创建的索引   :schema 
+	删除索引：DROP INDEX ON :Nodes(name)
+	
+3、显示全部节点（默认显示300个节点，若实体超过300，在设置中“Initial Node Display”设置显示数值）           
+  match(n) return n	
+  

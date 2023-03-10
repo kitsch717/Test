@@ -1,0 +1,4 @@
+[2022-08-29 13:35:30] [info]  [15228] Apache Commons Daemon procrun (1.2.0.0 64-bit) started.
+[2022-08-29 13:35:36] [info]  [15228] Installing service 'neo4j' name 'Neo4j Graph Database - neo4j'.
+[2022-08-29 13:35:36] [info]  [15228] Service 'neo4j' installed.
+[2022-08-29 13:35:36] [info]  [15228] Apache Commons Daemon procrun finished.
